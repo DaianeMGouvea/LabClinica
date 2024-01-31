@@ -1,5 +1,6 @@
 import 'package:asyncstate/asyncstate.dart';
 import 'package:fe_lab_clinicas_core/src/loader/lab_clinicas_loader.dart';
+import 'package:fe_lab_clinicas_core/src/theme/lab_clinicas_theme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_getit/flutter_getit.dart';
@@ -10,13 +11,13 @@ class LabClinicasCoreConfig extends StatelessWidget {
       this.bindings,
       this.pages,
       this.pagesBuilders,
-      this.modulos,
+      this.modules,
       required this.title});
 
   final ApplicationBindings? bindings;
   final List<FlutterGetItPageRouter>? pages;
   final List<FlutterGetItPageBuilder>? pagesBuilders;
-  final List<FlutterGetItModule>? modulos;
+  final List<FlutterGetItModule>? modules;
   final String title;
 
   @override
@@ -25,11 +26,13 @@ class LabClinicasCoreConfig extends StatelessWidget {
         debugMode: kDebugMode,
         bindings: bindings,
         pages: [...pages ?? [], ...pagesBuilders ?? []],
+        modules: modules,
         builder: (context, routes, flutterGetItNavObserver) {
           return AsyncStateBuilder(
             loader: LabClinicasLoader(),
             builder: (navigatorObserver) {
               return MaterialApp(
+                theme: LabClinicasTheme.lightTheme,
                 navigatorObservers: [
                   navigatorObserver,
                   flutterGetItNavObserver
