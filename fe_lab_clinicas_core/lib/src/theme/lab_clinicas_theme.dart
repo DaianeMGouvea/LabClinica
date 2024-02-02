@@ -6,7 +6,7 @@ final class LabClinicasTheme {
   static const blueColor = Color(0xFF01BDD6);
   static const lightGrayColor = Color(0xFFFFEFE9);
 
-  static final _defaultInputBorde = OutlineInputBorder(
+  static final _defaultInputBorder = OutlineInputBorder(
     borderRadius: BorderRadius.circular(16),
     borderSide: const BorderSide(color: lightOrangeColor),
   );
@@ -26,9 +26,9 @@ final class LabClinicasTheme {
       ),
       floatingLabelStyle:
           const TextStyle(color: blueColor, fontWeight: FontWeight.w600),
-      enabledBorder: _defaultInputBorde,
-      focusedBorder: _defaultInputBorde,
-      errorBorder: _defaultInputBorde.copyWith(
+      enabledBorder: _defaultInputBorder,
+      focusedBorder: _defaultInputBorder,
+      errorBorder: _defaultInputBorder.copyWith(
         borderSide: const BorderSide(color: Colors.red),
       ),
     ),
@@ -46,6 +46,7 @@ final class LabClinicasTheme {
         ),
       ),
     ),
+    
   );
 
   static const titleStyle = TextStyle(
