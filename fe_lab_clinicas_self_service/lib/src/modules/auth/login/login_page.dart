@@ -67,6 +67,7 @@ class _LoginPageState extends State<LoginPage> with MessageViewMixin {
                       height: 32,
                     ),
                     TextFormField(
+                      keyboardType: TextInputType.emailAddress,
                       controller: emailEC,
                       decoration: const InputDecoration(
                         label: Text('Email'),

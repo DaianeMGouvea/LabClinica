@@ -26,10 +26,26 @@ final class LabClinicasTheme {
       ),
       floatingLabelStyle:
           const TextStyle(color: blueColor, fontWeight: FontWeight.w600),
+      border: _defaultInputBorder,
       enabledBorder: _defaultInputBorder,
       focusedBorder: _defaultInputBorder,
       errorBorder: _defaultInputBorder.copyWith(
         borderSide: const BorderSide(color: Colors.red),
+      ),
+    ),
+    outlinedButtonTheme: OutlinedButtonThemeData(
+      style: OutlinedButton.styleFrom(
+        foregroundColor: blueColor,
+        backgroundColor: Colors.white,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+        ),
+        textStyle: const TextStyle(
+          fontFamily: 'Monteserrat',
+          fontSize: 14,
+          fontWeight: FontWeight.bold,
+        ),
+        side: const BorderSide(color: blueColor),
       ),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
@@ -42,11 +58,10 @@ final class LabClinicasTheme {
         textStyle: const TextStyle(
           fontFamily: 'Monteserrat',
           fontSize: 14,
-          fontWeight: FontWeight.w700,
+          fontWeight: FontWeight.bold,
         ),
       ),
     ),
-    
   );
 
   static const titleStyle = TextStyle(

@@ -10,7 +10,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: LabClinicasAppbar(actions: [
         PopupMenuButton<int>(
-          child: IconPopupMenuWidget(),
+          child: const IconPopupMenuWidget(),
           itemBuilder: (context) {
             return [
               const PopupMenuItem<int>(
