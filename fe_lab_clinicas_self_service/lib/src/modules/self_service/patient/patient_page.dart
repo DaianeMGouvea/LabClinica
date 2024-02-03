@@ -49,14 +49,14 @@ class _PatientPageState extends State<PatientPage>
 
   @override
   Widget build(BuildContext context) {
-    var sizeOf = MediaQuery.sizeOf(context).width;
+    var sizeOf = MediaQuery.sizeOf(context);
     return Scaffold(
       appBar: LabClinicasSelfServiceAppBar(),
       body: Align(
         alignment: Alignment.topCenter,
         child: SingleChildScrollView(
           child: Container(
-            width: sizeOf * .85,
+            width: sizeOf.width * .85,
             margin: const EdgeInsets.only(top: 18),
             padding: const EdgeInsets.all(32),
             decoration: BoxDecoration(
