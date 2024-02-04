@@ -1,4 +1,6 @@
+import 'package:asyncstate/asyncstate.dart';
 import 'package:camera/camera.dart';
+import 'package:dotted_border/dotted_border.dart';
 import 'package:fe_lab_clinicas_core/fe_lab_clinicas_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_getit/flutter_getit.dart';
@@ -23,8 +25,7 @@ class _DocumentsScanPageState extends State<DocumentsScanPage> {
 
   @override
   Widget build(BuildContext context) {
-    var sizeOf = MediaQuery.sizeOf(context);
-
+    final sizeOf = MediaQuery.sizeOf(context);
     return Scaffold(
       appBar: LabClinicasAppbar(),
       body: Align(
@@ -33,7 +34,7 @@ class _DocumentsScanPageState extends State<DocumentsScanPage> {
           child: Container(
             width: sizeOf.width * .85,
             margin: const EdgeInsets.only(top: 18),
-            padding: const EdgeInsets.all(32),
+            padding: const EdgeInsets.all(30),
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(16),
@@ -44,12 +45,12 @@ class _DocumentsScanPageState extends State<DocumentsScanPage> {
             child: Column(
               children: [
                 Image.asset('assets/images/cam_icon.png'),
-                const SizedBox(height: 24),
+                const SizedBox(height: 15),
                 const Text(
                   'TIRAR FOTO AGORA',
                   style: LabClinicasTheme.titleSmallStyle,
                 ),
-                const SizedBox(height: 24),
+                const SizedBox(height: 15),
                 const Text(
                   'Posicione o documento dentro do quadrado abaixo e aparte o botão para tira foto',
                   textAlign: TextAlign.center,
@@ -59,7 +60,7 @@ class _DocumentsScanPageState extends State<DocumentsScanPage> {
                     color: LabClinicasTheme.blueColor,
                   ),
                 ),
-                const SizedBox(height: 24),
+                const SizedBox(height: 15),
                 FutureBuilder(
                   future: cameraController.initialize(),
                   builder: (context, snapshot) {
@@ -73,13 +74,47 @@ class _DocumentsScanPageState extends State<DocumentsScanPage> {
                         );
                       case AsyncSnapshot(connectionState: ConnectionState.done):
                         if (cameraController.value.isInitialized) {
-                          return CameraPreview(cameraController);
+                          return ClipRRect(
+                              borderRadius: BorderRadius.circular(16),
+                              child: SizedBox(
+                                width: sizeOf.width * .45,
+                                child: CameraPreview(
+                                  cameraController,
+                                  child: DottedBorder(
+                                    dashPattern: const [1, 10, 1, 3],
+                                    radius: const Radius.circular(16),
+                                    color: LabClinicasTheme.orangeColor,
+                                    borderType: BorderType.RRect,
+                                    strokeWidth: 4,
+                                    strokeCap: StrokeCap.square,
+                                    child: const SizedBox.expand(),
+                                  ),
+                                ),
+                              ));
                         }
                     }
                     return const Center(
                       child: Text('Erro ao carregar camera'),
                     );
                   },
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                
+                SizedBox(
+                  width: sizeOf.width * .8,
+                  height: 48,
+                  child: ElevatedButton(
+                      onPressed: () async {
+                        final nav = Navigator.of(context);
+                        final foto =
+                            await cameraController.takePicture().asyncLoader();
+
+                        nav.pushNamed('/self-service/documents/scan/confirm',
+                            arguments: foto);
+                      },
+                      child: const Text('TIRAR FOTO')),
                 )
               ],
             ),
