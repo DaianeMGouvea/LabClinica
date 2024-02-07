@@ -1,8 +1,12 @@
 import 'package:fe_lab_clinicas_core/fe_lab_clinicas_core.dart';
+import 'package:fe_lab_clinicas_self_service/src/modules/self_service/self_service_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_getit/flutter_getit.dart';
 
 class DonePage extends StatelessWidget {
-  const DonePage({super.key});
+  DonePage({super.key});
+
+  final selfServiceController = Injector.get<SelfServiceController>();
 
   @override
   Widget build(BuildContext context) {
@@ -41,8 +45,8 @@ class DonePage extends StatelessWidget {
                     color: LabClinicasTheme.orangeColor,
                     borderRadius: BorderRadius.circular(16),
                   ),
-                  child: const Text(
-                    'BG4232',
+                  child: Text(
+                    selfServiceController.password,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 24,
@@ -97,7 +101,9 @@ class DonePage extends StatelessWidget {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: LabClinicasTheme.orangeColor,
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      selfServiceController.restartProcess();
+                    },
                     child: const Text(
                       'FINALIZAR',
                       style:
